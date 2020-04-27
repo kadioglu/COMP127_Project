@@ -1,9 +1,6 @@
 package Hangman;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 
 public class Hangman {
@@ -13,6 +10,7 @@ public class Hangman {
     private ArrayList<String> usedLetters;
     private static int guessesLeft = 6;
     private Scanner scan = new Scanner(System.in);
+    private Set<Character> guesses;
 
     public Hangman() {
         startGame();
@@ -55,7 +53,17 @@ public class Hangman {
      * have been used. Maybe even keep track if they won or lost
      */
     private void userGuesses() {
-
+        guesses = new HashSet<Character>();
+        while(guessesLeft!=0){
+            System.out.println("Guess a letter.");
+            char guessedLetter = scan.next().charAt(0);
+            if (guesses.contains(guessedLetter)){
+                System.out.println("You've already guessed this letter before. Try again.");
+            }
+            else {
+                guesses.add(guessedLetter);
+            }
+        }
     }
 
     /**
