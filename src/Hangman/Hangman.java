@@ -5,12 +5,14 @@ import java.util.*;
 
 public class Hangman {
 
-    private List<String> words = new ArrayList<>();// wordlist
+    private List<String> words = new ArrayList<>();// wordlist ( Would like to be able to pull from a list of words online for this one.)
     private Random random;
-    private ArrayList<String> usedLetters;
     private static int guessesLeft = 6;
     private Scanner scan = new Scanner(System.in);
     private Set<Character> guesses;
+    private char guessedLetter;
+    private char[] genRandomLetter;
+    private char[] genRandomLetter2;
 
     public Hangman() {
         startGame();
@@ -48,6 +50,20 @@ public class Hangman {
         userGuesses();
     }
 
+    private void generateWord() {
+        int randomNumber = (int) Math.ceil(Math.random() * words.size());
+        words.add("gravity");
+        words.add("vanilla");
+        words.add("banana");
+        String randomWord = words.get(randomNumber);
+        genRandomLetter = randomWord.toCharArray();
+        genRandomLetter2 = randomWord.toCharArray();
+        for (int i = 0; i<genRandomLetter.length;i++) {
+            genRandomLetter[i] = '-';
+        }
+
+    }
+
     /**
      * This method should keep track of the lives left and what letters
      * have been used. Maybe even keep track if they won or lost
@@ -56,13 +72,28 @@ public class Hangman {
         guesses = new HashSet<Character>();
         while(guessesLeft!=0){
             System.out.println("Guess a letter.");
-            char guessedLetter = scan.next().charAt(0);
+            guessedLetter = scan.next().charAt(0);
             if (guesses.contains(guessedLetter)){
                 System.out.println("You've already guessed this letter before. Try again.");
             }
             else {
                 guesses.add(guessedLetter);
             }
+        }
+    }
+
+    private void checkGuess() {
+        boolean found = false;
+        for (int i=0;i<genRandomLetter2.length;i++){
+            if (genRandomLetter2[i]== guessedLetter){
+                genRandomLetter[i] = guessedLetter;
+                found = true;
+            }
+        }
+        if (!found){
+            System.out.println("Wrong letter, try again!");
+            guessesLeft--;
+            System.out.println("Guesses left " + guessesLeft);
         }
     }
 

@@ -19,7 +19,7 @@ public class HangmanConsole {
         char[] genRadmLetter = radmWord.toCharArray();
         char[] genRadmLetter2 = radmWord.toCharArray();
         for (int x = 0; x < genRadmLetter.length; x++) {
-            genRadmLetter[x] = '?';
+            genRadmLetter[x] = '-';
         }
 
         Set<Character> guesses = new HashSet<Character>();
