@@ -45,8 +45,8 @@ public class Hangman {
         }
         System.out.println("\nYou have " + guessesLeft + " guesses left");
 
-        win(); // here for testing purposes
-
+//        win(); // here for testing purposes
+        generateWord();
         userGuesses();
     }
 
@@ -70,22 +70,31 @@ public class Hangman {
      */
     private void userGuesses() {
         guesses = new HashSet<Character>();
-        while(guessesLeft!=0){
+        while(guessesLeft!=0 || !(genRandomLetter.equals(genRandomLetter2))){
             System.out.println("Guess a letter.");
             guessedLetter = scan.next().charAt(0);
             if (guesses.contains(guessedLetter)){
                 System.out.println("You've already guessed this letter before. Try again.");
             }
+
             else {
                 guesses.add(guessedLetter);
+                checkGuess();
             }
+            System.out.println(genRandomLetter);
+        }
+        if (guessesLeft == 0) {
+            lose();
+        }
+        else {
+            win();
         }
     }
 
     private void checkGuess() {
         boolean found = false;
-        for (int i=0;i<genRandomLetter2.length;i++){
-            if (genRandomLetter2[i]== guessedLetter){
+        for (int i = 0; i < genRandomLetter.length; i++){
+            if (genRandomLetter2[i] == guessedLetter){
                 genRandomLetter[i] = guessedLetter;
                 found = true;
             }
