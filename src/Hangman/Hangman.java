@@ -38,11 +38,11 @@ public class Hangman {
      * Initializes the game of hangman
      */
     private void startGame() {
-        //pick random word--can be method or through random generator here
-        String hiddenWord = "vanilla"; // for testing
-        for (int i = 0; i < hiddenWord.length(); i++) {
-            System.out.print(" - ");
-        }
+       //pick random word--can be method or through random generator here
+       //String hiddenWord = "vanilla"; // for testing
+       //for (int i = 0; i < hiddenWord.length(); i++) {
+       //    System.out.print(" - ");
+       //}
         System.out.println("\nYou have " + guessesLeft + " guesses left");
 
 //        win(); // here for testing purposes
@@ -51,10 +51,10 @@ public class Hangman {
     }
 
     private void generateWord() {
-        int randomNumber = (int) Math.ceil(Math.random() * words.size());
         words.add("gravity");
         words.add("vanilla");
         words.add("banana");
+        int randomNumber = (int) Math.ceil(Math.random() * (words.size()-1));
         String randomWord = words.get(randomNumber);
         genRandomLetter = randomWord.toCharArray();
         genRandomLetter2 = randomWord.toCharArray();
@@ -70,8 +70,9 @@ public class Hangman {
      */
     private void userGuesses() {
         guesses = new HashSet<Character>();
-        while(guessesLeft!=0 || !(genRandomLetter.equals(genRandomLetter2))){
+        do {
             System.out.println("Guess a letter.");
+            System.out.println(String.valueOf(genRandomLetter));
             guessedLetter = scan.next().charAt(0);
             if (guesses.contains(guessedLetter)){
                 System.out.println("You've already guessed this letter before. Try again.");
@@ -81,8 +82,10 @@ public class Hangman {
                 guesses.add(guessedLetter);
                 checkGuess();
             }
-            System.out.println(genRandomLetter);
-        }
+            if (Arrays.equals(genRandomLetter,genRandomLetter2)){
+                break;
+            }
+        }while(guessesLeft!=0);
         if (guessesLeft == 0) {
             lose();
         }
