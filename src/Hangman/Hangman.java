@@ -27,7 +27,9 @@ public class Hangman {
     private void playAgain(String response) {
         if (response.equalsIgnoreCase("y")) {
             System.out.println("We're playing again");
-            // startGame();
+            guesses.clear();
+            startGame();
+
         }
         else {
             System.out.println("Game Over. Thanks for playing");
@@ -115,7 +117,7 @@ public class Hangman {
      */
     private void win() {
         System.out.println("Congrats! You won! Would you like to play again? (Type \"y\" or \"n\")");
-       playAgain(scan.nextLine());
+        playAgain(scan.next());
     }
 
     /**
@@ -124,7 +126,7 @@ public class Hangman {
      */
     private void lose() {
         System.out.println("I'm sorry, but you lost. Would you like to play again? (Type \"y\" or \"n\")");
-       playAgain(scan.nextLine());
+       playAgain(scan.next());
     }
 
     public static void main (String args[]) {
