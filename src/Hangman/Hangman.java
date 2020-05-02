@@ -15,6 +15,8 @@ public class Hangman {
     private char[] genRandomLetter;
     private char[] genRandomLetter2;
 
+    private HangmanDisplay hangmanDisplay;
+
     public Hangman() {
         startGame();
     }
@@ -29,6 +31,8 @@ public class Hangman {
         if (response.equalsIgnoreCase("y")) {
             System.out.println("We're playing again");
             guesses.clear();
+            hangmanDisplay.clearTheScreen();
+            guessesLeft = 6;
             startGame();
 
         }
@@ -49,6 +53,7 @@ public class Hangman {
         System.out.println("\nYou have " + guessesLeft + " guesses left");
 
 //        win(); // here for testing purposes
+        hangmanDisplay = new HangmanDisplay();
         generateWord();
         userGuesses();
     }
@@ -88,7 +93,7 @@ public class Hangman {
             if (Arrays.equals(genRandomLetter,genRandomLetter2)){
                 break;
             }
-        }while(guessesLeft!=0);
+        } while(guessesLeft!=0);
         if (guessesLeft == 0) {
             lose();
         }
@@ -108,6 +113,7 @@ public class Hangman {
         if (!found){
             System.out.println("Wrong letter, try again!");
             guessesLeft--;
+            hangmanDisplay.addPart(guessesLeft);
             System.out.println("Guesses left " + guessesLeft);
         }
     }
@@ -117,6 +123,7 @@ public class Hangman {
      * they want to play again
      */
     private void win() {
+        System.out.println(genRandomLetter);
         System.out.println("Congrats! You won! Would you like to play again? (Type \"y\" or \"n\")");
         playAgain(scan.next());
     }
@@ -126,7 +133,7 @@ public class Hangman {
      * they want to play again
      */
     private void lose() {
-        System.out.println("I'm sorry, but you lost. Would you like to play again? (Type \"y\" or \"n\")");
+        System.out.println("I'm sorry, but you lost. The word was: " + guessedLetter + ". Would you like to play again? (Type \"y\" or \"n\")");
        playAgain(scan.next());
     }
 
