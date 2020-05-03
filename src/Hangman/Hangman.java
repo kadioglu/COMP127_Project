@@ -1,5 +1,8 @@
 package Hangman;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.*;
 
 
@@ -10,14 +13,16 @@ public class Hangman {
     private Random random;
     private static int guessesLeft = 6;
     private Scanner scan = new Scanner(System.in);
+    private Scanner file = new Scanner(new File("COMP127_Project\\HangmanWords.txt"));
     private Set<Character> guesses;
+    private String randomWord;
     private char guessedLetter;
     private char[] genRandomLetter;
     private char[] genRandomLetter2;
 
     private HangmanDisplay hangmanDisplay;
 
-    public Hangman() {
+    public Hangman() throws FileNotFoundException {
         startGame();
     }
 
@@ -59,11 +64,11 @@ public class Hangman {
     }
 
     private void generateWord() {
-        words.add("gravity");
-        words.add("vanilla");
-        words.add("banana");
+        while(file.hasNext()){
+            words.add(file.nextLine());
+        }
         int randomNumber = (int) Math.ceil(Math.random() * (words.size()-1));
-        String randomWord = words.get(randomNumber);
+        randomWord = words.get(randomNumber);
         genRandomLetter = randomWord.toCharArray();
         genRandomLetter2 = randomWord.toCharArray();
         for (int i = 0; i<genRandomLetter.length;i++) {
@@ -123,7 +128,7 @@ public class Hangman {
      * they want to play again
      */
     private void win() {
-        System.out.println(genRandomLetter);
+        System.out.println(randomWord);
         System.out.println("Congrats! You won! Would you like to play again? (Type \"y\" or \"n\")");
         playAgain(scan.next());
     }
@@ -133,11 +138,11 @@ public class Hangman {
      * they want to play again
      */
     private void lose() {
-        System.out.println("I'm sorry, but you lost. The word was: " + guessedLetter + ". Would you like to play again? (Type \"y\" or \"n\")");
+        System.out.println("I'm sorry, but you lost. The word was: " + randomWord + ". Would you like to play again? (Type \"y\" or \"n\")");
        playAgain(scan.next());
     }
 
-    public static void main (String args[]) {
+    public static void main (String args[]) throws FileNotFoundException {
         Hangman game = new Hangman();
     }
 }
