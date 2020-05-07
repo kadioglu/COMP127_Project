@@ -7,6 +7,8 @@ import java.awt.*;
 
 public class HangmanDisplay {
     /**
+     * @authors: Lizbet Jacobo & Joseph Mena
+     *
      * This class creates a basic hangman outline that updates as the user
      * gets the questions wrong
      */
@@ -27,12 +29,7 @@ public class HangmanDisplay {
     public HangmanDisplay(){
         canvas = new CanvasWindow("Hangman", CANVAS_WIDTH, CANVAS_HEIGHT);
     }
-
-    // main here for testing purposes
-  /*  public static void main(String args[]) {
-        HangmanDisplay h = new HangmanDisplay();
-    }*/
-
+    
     /**
      * This parameter calls the corresponding body part depending
      * on how many guesses left the user has.

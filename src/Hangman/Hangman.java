@@ -4,10 +4,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
+/**
+ * @authors: Lizbet Jacobo & Joseph Mena
+ * Hangman Class where the game of hangman is played
+ */
 
 public class Hangman {
 
-    // Esra Idea: Use maps w/ numbers as keys and words as values and just pull value from random key
     private List<String> words = new ArrayList<>();// wordlist ( Would like to be able to pull from a list of words online for this one.)
     private Random random;
     private static int guessesLeft = 6;

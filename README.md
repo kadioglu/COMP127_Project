@@ -1,5 +1,5 @@
 # COMP 127 Final Project: Hangman
-Joseph &amp; Lizbet's final project for COMP 127: Hangman Game
+Joseph Mena &amp; Lizbet Jacobo's final project for COMP 127: Hangman Game
 
 In Hangman, you have to guess a word with a limited number of guesses. The mystery word is represented by a series of dashes ("-"). 
 
