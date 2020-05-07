@@ -6,6 +6,10 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class HangmanConsole {
+    /**
+     * This is not the main Hangman class. This is
+     * @param args
+     */
 
     public static void main(String[] args) {
         Scanner Input = new Scanner(System.in);

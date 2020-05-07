@@ -2,7 +2,6 @@ package Hangman;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.*;
 
 
@@ -34,7 +33,7 @@ public class Hangman {
      */
     private void playAgain(String response) {
         if (response.equalsIgnoreCase("y")) {
-            System.out.println("We're playing again");
+            System.out.println("We're playing again\n");
             guesses.clear();
             hangmanDisplay.clearTheScreen();
             guessesLeft = 6;
@@ -42,6 +41,7 @@ public class Hangman {
 
         }
         else {
+            hangmanDisplay.closeCanvas();
             System.out.println("Game Over. Thanks for playing");
         }
     }
@@ -50,14 +50,8 @@ public class Hangman {
      * Initializes the game of hangman
      */
     private void startGame() {
-       //pick random word--can be method or through random generator here
-       //String hiddenWord = "vanilla"; // for testing
-       //for (int i = 0; i < hiddenWord.length(); i++) {
-       //    System.out.print(" - ");
-       //}
         System.out.println("\nYou have " + guessesLeft + " guesses left");
 
-//        win(); // here for testing purposes
         hangmanDisplay = new HangmanDisplay();
         generateWord();
         userGuesses();
@@ -107,6 +101,9 @@ public class Hangman {
         }
     }
 
+    /**
+     * Method checks if the guess is in the hidden word
+     */
     private void checkGuess() {
         boolean found = false;
         for (int i = 0; i < genRandomLetter.length; i++){
@@ -129,7 +126,7 @@ public class Hangman {
      */
     private void win() {
         System.out.println(randomWord);
-        System.out.println("Congrats! You won! Would you like to play again? (Type \"y\" or \"n\")");
+        System.out.println("Congrats! You won! Would you like to play again? (Type \"y\" to play again)");
         playAgain(scan.next());
     }
 
@@ -138,7 +135,9 @@ public class Hangman {
      * they want to play again
      */
     private void lose() {
-        System.out.println("I'm sorry, but you lost. The word was: " + randomWord + ". Would you like to play again? (Type \"y\" or \"n\")");
+        hangmanDisplay.addPart(guessesLeft);
+        System.out.println("I'm sorry, but you lost. The word was: " + randomWord + ". " +
+                "Would you like to play again? (Type \"y\" to play again)");
        playAgain(scan.next());
     }
 

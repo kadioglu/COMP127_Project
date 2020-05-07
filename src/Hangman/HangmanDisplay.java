@@ -1,6 +1,5 @@
 package Hangman;
 
-//import comp127graphics.Ellipse;
 import comp127graphics.*;
 
 import java.awt.*;
@@ -21,21 +20,12 @@ public class HangmanDisplay {
     private Line leftArm;
     private Line rightLeg;
     private Line leftLeg;
-    // Do we need a variable for every part, or code it within?
 
     private GraphicsGroup bodyParts;
 
 
     public HangmanDisplay(){
         canvas = new CanvasWindow("Hangman", CANVAS_WIDTH, CANVAS_HEIGHT);
-
-        // Here for testing purposes
-//        addHead();
-//        addBody();
-//        addLeftLeg();
-//        addRightLeg();
-//        addLeftArm();
-//        addRightArm();
     }
 
     // main here for testing purposes
@@ -71,13 +61,17 @@ public class HangmanDisplay {
                canvas.draw();
                break;
            case 0:
-               this.addRightArm();
+               this.addRightLeg();
                canvas.draw();
+               break;
            default:
                break;
        }
     }
 
+    /**
+     * Following methods add the different body parts of the hangman drawing
+     */
     private void addHead() {
         head = new Ellipse (CANVAS_WIDTH / 2 - 30, CANVAS_HEIGHT / 7, 60, 60);
         head.setFilled(false);
@@ -125,8 +119,15 @@ public class HangmanDisplay {
         canvas.add(leftArm);
     }
 
+    /**
+     * Methods clear the screen and close the canvas
+     */
     public void clearTheScreen() {
         canvas.removeAll();
+    }
+
+    public void closeCanvas() {
+        canvas.closeWindow();
     }
 
 }
